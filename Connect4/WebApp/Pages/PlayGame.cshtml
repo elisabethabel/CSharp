@@ -1,0 +1,74 @@
+﻿@page
+@using Domain
+@model WebApp.Pages.PlayGame.PlayGameModel
+<table>
+    <tr>
+        @if (Model.Game.GameIsOver)
+        {
+            <td>@Model.Game.Message</td>
+        }
+        else
+        {
+            if (@Model.Game.PlayerOneMoves)
+            {
+                <td>@Model.Game.PlayerOneName's turn</td>
+            }
+            else
+            {
+                <td>@Model.Game.PlayerTwoName's turn</td>
+            }
+        }
+    </tr>
+    <tr><td>&nbsp;</td></tr>
+</table>
+
+<table class="table table-dark" style="width: initial">
+    <thead>
+    <tr>
+        @for (var x = 0; x < Model.Game.BoardWidth; x++)
+        {
+            <th>
+                @(x + 1) 
+            </th>
+        }
+    </tr>
+    </thead>
+
+
+    <tbody>
+    @for (var y = 0; y < Model.Game.BoardHeight; y++)
+    {
+        <tr>
+            @for (var x = 0; x < Model.Game.BoardWidth; x++)
+            {
+                <td>
+                    @if (@Model.Game.GetBoardCellValue(y, x) == CellState.R)
+                    {
+                        <button type="button" class="btn btn-secondary btn-danger" disabled>@Html.Raw(Model.Game.GetSingleState((Model.Game.GetBoardCellValue(y, x))))</button>
+                    } else if (@Model.Game.GetBoardCellValue(y, x) == CellState.G)
+                    {
+                        <button type="button" class="btn btn-secondary btn-success" disabled>@Html.Raw(Model.Game.GetSingleState((Model.Game.GetBoardCellValue(y, x))))</button>
+                    }
+                    else if (@Model.Game.FindYIndex(x) != y || @Model.Game.GameIsOver)
+                    {
+                        <button type="button" class="btn btn-secondary" disabled>&nbsp;&nbsp;</button>
+                    }
+                    else
+                    {
+                        <a asp-page="/PlayGame" asp-route-gameId="@Model.Game.GameId" asp-route-col="@x" asp-route-row="@y" class="btn btn-secondary">&nbsp;&nbsp;</a>
+                    }
+                </td>
+            }
+        </tr>
+    }
+    </tbody>
+</table>
+
+@if (Model.Game.GameIsOver)
+{
+    <a class="btn btn-info" asp-page="/Index">New Game</a>
+}
+else
+{
+    <div><a class="btn btn-info" asp-page="/Index">Quit</a></div>
+}

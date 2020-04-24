@@ -1,0 +1,92 @@
+﻿@page
+@model IndexModel
+
+@{
+    ViewData["Title"] = "Connect 4";
+}
+
+<h1>New Game</h1>
+<form method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <table>
+        <tr><td>&nbsp;</td></tr>
+        <tr>
+            <td>
+                <label asp-for="GameSettings.BoardHeight" class="control-label"></label>
+            </td>
+            <td>
+                <input asp-for="GameSettings.BoardHeight" placeholder="Board Height.." class="form-control"/>
+                <span asp-validation-for="GameSettings.BoardHeight" class="text-danger"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="GameSettings.BoardWidth" class="control-label"></label>
+            </td>
+            <td>
+                <input asp-for="GameSettings.BoardWidth" placeholder="Board Width.." class="form-control"/>
+                <span asp-validation-for="GameSettings.BoardWidth" class="text-danger"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="GameSettings.WinningCondition" class="control-label"></label>
+            </td>
+            <td>
+                <input asp-for="GameSettings.WinningCondition" placeholder="Winning Condition.." class="form-control"/>
+                <span asp-validation-for="GameSettings.WinningCondition" class="text-danger"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="Game.PlayerOneName" class="control-label"></label>
+            </td>
+            <td>
+                <input asp-for="Game.PlayerOneName" placeholder="Player One.." class="form-control"/>
+                <span asp-validation-for="Game.PlayerOneName" class="text-danger"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="Game.PlayerTwoName" class="control-label"></label>
+            </td>
+            <td>
+                <input asp-for="Game.PlayerTwoName" placeholder="Player Two/ Computer.." class="form-control"/>
+                <span asp-validation-for="Game.PlayerTwoName" class="text-danger"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="Game.GameName" class="control-label"></label>
+            </td>
+            <td>
+                <input asp-for="Game.GameName" placeholder="Game Name" class="form-control"/>
+                <span asp-validation-for="Game.GameName" class="text-danger"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="Game.PlayerOneMoves" class="control-label"></label>
+            </td>
+            <td>
+                <input asp-for="Game.PlayerOneMoves" class="form-control"/>
+                <span asp-validation-for="Game.PlayerOneMoves" class="text-danger"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="GameSettings.IsHumanVsComputer" class="control-label"></label>
+            </td>
+            <td>
+                <input asp-for="GameSettings.IsHumanVsComputer" class="form-control"/>
+                <span asp-validation-for="GameSettings.IsHumanVsComputer" class="text-danger"></span>
+            </td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+    </table>
+    <input type="submit" value="START" class="btn btn-primary"/>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
